@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Cadastro</title>
+  <link rel="stylesheet" href="login.page.css">
+</head>
+<body>
+
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Entrar / Cadastrar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <div class="form-container">
+
+      <h2>Bem-vindo 👋</h2>
+      <p class="subtitle">Entre ou crie sua conta para continuar</p>
+
+      <form id="loginForm">
+        <div class="input-group">
+          <input type="text" class="custom-input" placeholder="Seu nome completo" id="nome">
+        </div>
+
+        <div class="input-group">
+          <input type="email" class="custom-input" placeholder="Email ou telefone" id="email">
+        </div>
+
+        <div class="input-group password-group">
+          <input type="password" class="custom-input" placeholder="Senha (mínimo 6 caracteres)" id="senha">
+          <button type="button" class="show-password" onclick="togglePassword()">👁️</button>
+        </div>
+
+        <ion-button expand="block" type="submit">Entrar</ion-button>
+        <ion-button expand="block" color="tertiary" class="register-btn">Cadastrar</ion-button>
+      </form>
+
+      <div class="divider"><span>ou</span></div>
+
+      <div class="social-buttons">
+        <ion-button color="light" expand="block">Entrar com Google</ion-button>
+        <ion-button color="light" expand="block">Entrar com Facebook</ion-button>
+      </div>
+
+      <div class="cep-lookup ion-margin-top">
+          <h3 style="text-align: center; color: var(--ion-color-primary, #3880ff);">Busca de Endereço por CEP</h3>
+
+          <div class="input-group cep-group" style="display: flex; gap: 10px; margin-bottom: 15px;">
+              <input type="text" class="custom-input" placeholder="CEP (somente números)" id="cep" maxlength="8" style="flex-grow: 1;">
+              <ion-button onclick="buscarCep()" size="default">Buscar</ion-button>
+          </div>
+          
+          <div class="input-group">
+              <input type="text" class="custom-input" placeholder="Rua / Logradouro (Preenchido Automaticamente)" id="rua" readonly>
+          </div>
+          <div class="input-group">
+              <input type="text" class="custom-input" placeholder="Bairro" id="bairro" readonly>
+          </div>
+          <div class="input-group" style="display: flex; gap: 10px;">
+              <input type="text" class="custom-input" placeholder="Cidade" id="cidade" readonly style="flex-grow: 3;">
+              <input type="text" class="custom-input" placeholder="UF" id="uf" readonly style="flex-grow: 1; max-width: 80px;">
+          </div>
+      </div>
+    </div>
+  </ion-content>
+
+  <script>
+    // Seus scripts JavaScript permanecem inalterados, pois eles trabalham com os IDs.
+    function togglePassword() {
+      const input = document.getElementById("senha");
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    async function buscarCep() {
+      const cepInput = document.getElementById('cep');
+      const cep = cepInput.value.replace(/\D/g, ''); 
+
+      if (cep.length !== 8) {
+        alert("Por favor, digite um CEP válido com 8 dígitos.");
+        return;
+      }
+
+      const ruaInput = document.getElementById('rua');
+      const bairroInput = document.getElementById('bairro');
+      const cidadeInput = document.getElementById('cidade');
+      const ufInput = document.getElementById('uf');
+      
+      ruaInput.value = 'Buscando...';
+      bairroInput.value = '';
+      cidadeInput.value = '';
+      ufInput.value = '';
+
+      try {
+        const url = `https://viacep.com.br/ws/${cep}/json/`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.erro) {
+          alert("CEP não encontrado ou inválido.");
+          limparCamposEndereco();
+          return;
+        }
+
+        ruaInput.value = data.logradouro;
+        bairroInput.value = data.bairro;
+        cidadeInput.value = data.localidade;
+        ufInput.value = data.uf;
+
+      } catch (error) {
+        alert("Erro de conexão ao buscar o CEP. Verifique sua rede.");
+        limparCamposEndereco();
+      }
+    }
+
+    function limparCamposEndereco() {
+        document.getElementById('rua').value = '';
+        document.getElementById('bairro').value = '';
+        document.getElementById('cidade').value = '';
+        document.getElementById('uf').value = '';
+    }
+  </script>
+
+</body>
+</html>

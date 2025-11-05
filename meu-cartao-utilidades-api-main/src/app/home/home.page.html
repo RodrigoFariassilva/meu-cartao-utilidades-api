@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <!-- Botão de Voltar (Seta da Imagem) -->
+      <ion-back-button default-href="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>CARTEIRINHA</ion-title>
+    <!-- Substituído pelo título da imagem -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- 
+    1. Estrutura Principal da Carteirinha (Card Laranja)
+    Usei um div para maior controle do estilo de fundo e raio.
+  -->
+  <div style="
+    background-color: #ff8c00; /* Laranja Forte */
+    color: white; 
+    border-radius: 20px; 
+    padding: 30px 20px 20px 20px; 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Sombra suave para destacar */
+    position: relative; /* Para posicionar o logo */
+    overflow: hidden; /* Para garantir que tudo fique dentro do raio */
+    min-height: 400px;
+  ">
+    
+    <!-- Imagem e Perfil (Estilo Circular) -->
+    <div style="
+        width: 120px; 
+        height: 120px; 
+        border-radius: 50%; 
+        border: 4px solid white; /* Borda branca igual à imagem */
+        margin: 0 auto 20px auto; 
+        overflow: hidden; 
+        display: block;
+    ">
+      <!-- Mantenha o caminho da sua imagem; usei um placeholder genérico aqui -->
+      <img src="../../assets/icon/rsrs.jpg" alt="Foto do Aluno" style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+
+    <!-- Dados do Aluno -->
+    <h2 style="font-size: 1.4em; font-weight: 500; margin-top: 0; margin-bottom: 5px;">
+      Leonardo de Freitas Ribeiro
+    </h2>
+    
+    <h3 style="font-size: 1.6em; font-weight: bold; margin-top: 5px; margin-bottom: 15px; line-height: 1.2;">
+      Análise e Desenvolvimento de Sistemas
+    </h3>
+
+    <!-- Matrícula e Validade -->
+    <p style="font-size: 1em; margin: 5px 0;">
+      <span style="font-weight: bold;">Matrícula:</span> 24106072 
+    </p>
+    <p style="font-size: 1em; margin: 5px 0;">
+      <span style="font-weight: bold;">Validade:</span> 01/03/2026
+    </p>
+
+    <!-- Logo no canto inferior direito -->
+    <div style="position: absolute; bottom: 20px; right: 20px; text-align: right;">
+        <!-- Logo da UNISUAM foi substituído por um texto placeholder -->
+        <span style="font-size: 0.8em; font-weight: bold;">
+            LOGO AQUI
+        </span>
+        <!-- Se você tiver um caminho para um logo transparente, use: 
+        <img src="caminho/do/logo.png" alt="Logo da Instituição" style="width: 80px; filter: brightness(200%);" /> 
+        -->
+    </div>
+  </div>
+
+  <!-- Botão "Ir para Utilidades" da sua requisição original (mantido fora do card) -->
+  <ion-button expand="block" color="secondary" (click)="irParaUtilidades()" class="ion-margin-top">
+    <ion-icon slot="start" name="apps-outline"></ion-icon>
+    Ir para Utilidades
+  </ion-button>
+</ion-content>

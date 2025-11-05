@@ -1,0 +1,90 @@
+// ...existing code...
+
+/* Layout geral */
+:host {
+  display: block;
+}
+
+/* Fundo suave da página */
+ion-content {
+  --background: #f6f8fb;
+}
+
+/* Card centralizado e com sombra */
+ion-card {
+  position: relative;
+  max-width: 440px;
+  margin: 48px auto;
+  padding-top: 88px; /* espaço para o avatar circular */
+  border-radius: 14px;
+  overflow: visible;
+  box-shadow: 0 8px 24px rgba(18, 38, 63, 0.08);
+}
+
+/* Avatar circular (imagem) */
+ion-card img {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 10px 24px rgba(18, 38, 63, 0.12);
+  display: block;
+}
+
+/* Header do card centralizado */
+ion-card-header {
+  text-align: center;
+  padding: 16px 20px 24px;
+}
+
+ion-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #10233b;
+  margin-bottom: 6px;
+}
+
+ion-card-subtitle {
+  display: block;
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+/* Chip */
+ion-chip {
+  --background: #e6f8ef;
+  --color: #087f49;
+  margin-top: 6px;
+}
+
+/* Botão principal abaixo do card */
+ion-button[expand="block"] {
+  max-width: 440px;
+  margin: 18px auto;
+  display: block;
+  --border-radius: 10px;
+}
+
+/* Responsividade: avatar menor em telas pequenas */
+@media (max-width: 420px) {
+  ion-card {
+    margin: 28px 16px;
+    padding-top: 72px;
+  }
+  ion-card img {
+    top: -56px;
+    width: 112px;
+    height: 112px;
+  }
+  ion-card-title {
+    font-size: 1.05rem;
+  }
+}
+  
+// ...existing code...
